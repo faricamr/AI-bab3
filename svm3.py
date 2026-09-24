@@ -1,10 +1,11 @@
-#Example 3.3 Python SVM Iris Classifications
+#Example 3.3 Python SVM Iris CSV Classifications
 from sklearn import svm, datasets
-
-iris = datasets.load_iris()
-X = iris.data[:, :2]
-y = iris.target
-
+import pandas as pd
+df = pd.read_csv('iris.csv')
+X = df.values[:, :2]
+s = df['species']
+d = dict([(y,x) for x,y in enumerate(sorted(set(s)))])
+y = [d[x] for x in s]
 clf = svm.SVC()
 clf.fit(X, y)
 
